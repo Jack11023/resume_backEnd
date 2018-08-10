@@ -3,28 +3,31 @@ const fs = require('fs')
 const path = require('path')
 const bodyParser = require('body-parser')
 const session = require('express-session')
+const cors = require('cors');
 
 var app=express();
-app.use(function(req,res,next){
-    // res.setHeader('Access-Control-Allow-Origin','*')
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
-    res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
-    res.header("X-Powered-By",' 3.2.1')
-    res.header("Content-Type", "application/json;charset=utf-8");
-    next();
-})
+
+var corsOptions = {
+  origin: 'http://localhost:8080',
+  credentials: true,
+  maxAge: '1728000'
+  //这一项是为了跨域专门设置的
+}
+app.use(cors(corsOptions))
+
 //配置session
 app.use(session({
-    secret : 'key1212678876',
-    cookie:{maxAge:1000602},
-    resave : false,
-    saveUninitialized : true
+    secret: 'film',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        maxAge: 1000 * 60 * 30, // harlf of hour
+    },
 }))
-
 
 //配置bodyt-parser
 app.use(bodyParser.urlencoded({extended : false}))
+
 
 fs.readdir(path.join(__dirname,'router'),(err,fnames) => {
     if(err) throw err

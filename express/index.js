@@ -5,8 +5,11 @@ const bodyParser = require('body-parser')
 const session = require('express-session')
 const cors = require('cors');
 
+//配置静态资源托管
 var app=express();
+app.use('/static',express.static(path.join(__dirname,'./static')))
 
+//配置跨域
 var corsOptions = {
   origin: 'http://localhost:8080',
   credentials: true,
@@ -28,7 +31,7 @@ app.use(session({
 //配置bodyt-parser
 app.use(bodyParser.urlencoded({extended : false}))
 
-
+//配置路由
 fs.readdir(path.join(__dirname,'router'),(err,fnames) => {
     if(err) throw err
     fnames.forEach((fname) => {

@@ -1,7 +1,7 @@
 const conn = require('../model/connect _resume')
+const config = require('../config')
 
 const handler = (req,res) => {
-    console.log(req.session)
     if(!req.session||!req.session.userInfo) return res.send({data: null})
     const id = req.session.userInfo
     const query = 'select * from users where id=?'
@@ -12,7 +12,7 @@ const handler = (req,res) => {
         res.send({status: 200, msg: 'fetch success!',data: {
             userName: result[0].user_name,
             userPwd: result[0].user_pwd,
-            userAvatar: result[0].avatar
+            userAvatar: result[0].avatar || [config.root,'static','images','avatar1.jpg'].join('/')
         }})
     })
 }

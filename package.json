@@ -10,6 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "cors": "^2.8.4"
+    "connect-multiparty": "^2.1.1",
+    "cors": "^2.8.4",
+    "formidable": "^1.2.1"
   }
 }

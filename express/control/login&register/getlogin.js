@@ -1,5 +1,5 @@
-const conn = require('../model/connect _resume')
-const config = require('../config')
+const conn = require('../../model/connect _resume')
+const config = require('../../config')
 
 const handler = (req,res) => {
     if(!req.session||!req.session.userInfo) return res.send({data: null})

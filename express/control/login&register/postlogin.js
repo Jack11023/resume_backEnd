@@ -1,4 +1,4 @@
-const conn = require('../model/connect _resume')
+const conn = require('../../model/connect _resume')
 
 const handler = (req,res) => {
     const userName = req.body.userName
@@ -11,7 +11,8 @@ const handler = (req,res) => {
         if(saveInfo == 1) {      
             req.session.userInfo = result[0].id
         }
-        res.send({status: 200, msg: '登录成功!'})
+        req.session.isLogin = true
+        res.send({status: 200, msg: '登录成功!',userName: result[0].user_name})
     })
 }
 

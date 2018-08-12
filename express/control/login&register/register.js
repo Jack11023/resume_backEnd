@@ -1,8 +1,8 @@
-const conn = require('../model/connect _resume')
+const config = require('../../config')
+const conn = require(`../../model/connect _resume`)
 var formidable = require('formidable')
 const path = require('path')
-const config = require('../config')
-const move = require('../assets/lib/moveFile')
+const move = require(`../../assets/lib/moveFile`)
 
 const handler = (req, res) => {
 var form = new formidable.IncomingForm(); //创建上传表单

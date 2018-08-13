@@ -1,5 +1,5 @@
 const getInfo = require('../../assets/lib/getInfo')
 
-const handler = getInfo('home')
+const handler = getInfo('experiences')
 
 module.exports = handler

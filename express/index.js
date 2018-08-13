@@ -4,6 +4,7 @@ const path = require('path')
 const bodyParser = require('body-parser')
 const session = require('express-session')
 const cors = require('cors');
+const walk = require('./assets/lib/walkDir')
 
 //配置静态资源托管
 var app=express();
@@ -31,14 +32,12 @@ app.use(session({
 //配置bodyt-parser
 app.use(bodyParser.urlencoded({extended : false}))
 
-//配置路由
-fs.readdir(path.join(__dirname,'router'),(err,fnames) => {
-    if(err) throw err
-    fnames.forEach((fname) => {
-        const router = require(path.join(__dirname,'router',fname))
-        app.use(router)
-    })
+//利用第三方库配置路由
+walk(path.join(__dirname,'router')).forEach((fname) => {
+    const router = require(fname)
+    app.use(router)
 })
+
 
 app.listen(9090,function() {
     console.log('http://localhost:9090');
